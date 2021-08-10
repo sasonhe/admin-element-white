@@ -2,7 +2,9 @@
   <div class="header-bar">
     <el-row :gutter="10">
       <el-col :md="6">
-        <div class="logo"></div>
+        <div class="logo">
+          <img :src="`${$baseUrl}login/5dov.png`" fit="scale-down"/>
+        </div>
       </el-col>
       <el-col :md="18">
         <div class="user fr">
@@ -18,8 +20,7 @@
         </div>
         <div class="right-menu">
           <el-menu router :default-active="activeMenu" active-text-color="#409EFF" mode="horizontal" style="border:none">
-            <el-menu-item  index="/top/menu1">菜单1</el-menu-item>
-            <el-menu-item  index="/top/menu2">菜单2</el-menu-item>
+            <el-menu-item v-for="(item,index) in routes" :index="item.meta.path">{{item.meta.name}}</el-menu-item>
           </el-menu>
         </div>
       </el-col>
@@ -28,11 +29,12 @@
 </template>
 
 <script>
+  import { horizontal } from '@/router/modules/horizontal';
   export default {
     components:{},
     data() {
       return {
-
+        routes:horizontal.children
       };
     },
     methods: {
@@ -57,10 +59,8 @@
     computed:{
       activeMenu() {
         const route = this.$route
-        // const { meta, path } = route
         let meta = route.meta
         let path = route.path
-        // if set path, the sidebar will highlight the path you set
         if (meta.activeMenu) {
           return meta.activeMenu
         }
@@ -89,8 +89,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  height: 60px;
   line-height: 60px;
   font-size: 22px;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+.logo img{
+  height: 100%;
+  margin: 0 auto;
 }
 .user{
   margin-left: 20px;

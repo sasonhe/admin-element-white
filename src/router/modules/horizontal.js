@@ -7,7 +7,7 @@ export const horizontal = {
       path: 'project',
       redirect:'/horizontal/project/index',
       component: () => import('@/views/view'),
-      meta: { path:'/horizontal/project/index' },
+      meta: { path:'/horizontal/project/index',name: '项目', activeMenu:'/horizontal/project/index' },
       children: [
         {
           path: 'index',

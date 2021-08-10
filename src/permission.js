@@ -10,8 +10,11 @@ NProgress.configure({ showSpinner: false })
 const whiteList = ['/user/login']
 
 router.beforeEach(async(to, from, next) => {
-  NProgress.start()
   document.title = getPageTitle(to.meta.name)
+  NProgress.start()
+  next()
+  return;
+
   const hasToken = getToken();
   if (whiteList.indexOf(to.path) !== -1){
     next()
